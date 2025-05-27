@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard">
+    <h2>ダッシュボード</h2>
+    <div class="user-info">
+        <h3>ようこそ、{{ current_user.username }}さん</h3>
+        {% if current_user.team %}
+            <p>所属チーム: {{ current_user.team.name }}</p>
+        {% else %}
+            <p>まだチームに所属していません</p>
+        {% endif %}
+    </div>
+
+    <div class="teams-section">
+        <h3>チーム一覧</h3>
+        {% if teams %}
+            <div class="teams-grid">
+                {% for team in teams %}
+                    <div class="team-card">
+                        <h4>{{ team.name }}</h4>
+                        <p>{{ team.description }}</p>
+                        <p>メンバー数: {{ team.users|length }}</p>
+                        {% if not current_user.team %}
+                            <form method="POST" action="{{ url_for('join_team', team_id=team.id) }}">
+                                <button type="submit" class="btn">参加する</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>チームがまだ作成されていません</p>
+        {% endif %}
+    </div>
+
+    <div class="create-team-button">
+        <a href="{{ url_for('create_team') }}" class="btn">新しいチームを作成</a>
+    </div>
+</div>
+{% endblock %} 

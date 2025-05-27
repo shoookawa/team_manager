@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="welcome-section">
+    <h1>チーム管理アプリへようこそ</h1>
+    <p>チームを作成して、メンバーと協力しましょう</p>
+    {% if not current_user.is_authenticated %}
+        <div class="auth-buttons">
+            <a href="{{ url_for('login') }}" class="btn">ログイン</a>
+            <a href="{{ url_for('register') }}" class="btn">新規登録</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %} 
