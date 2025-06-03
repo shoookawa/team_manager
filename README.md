@@ -19,7 +19,7 @@
 
 1. リポジトリのクローン
 ```bash
-git clone [リポジトリURL]
+git clone https://github.com/shoookawa/team_manager
 cd team_manager
 ```
 
